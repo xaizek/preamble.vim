@@ -171,7 +171,7 @@ fun! s:Length()
     while(line_pos <= s:preamble_max_lines)
 
         " skip blank lines at top of file
-        if is_blankline && getline(line_pos) =~ "\S"
+        if is_blankline && getline(line_pos) =~ '\S'
             let is_blankline = 0
         endif
 
