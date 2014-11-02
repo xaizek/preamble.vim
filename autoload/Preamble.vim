@@ -27,7 +27,7 @@ fun! Preamble#Enable(filetypes)
     if a:filetypes == "" | return | endif
 
     augroup AugroupPreamble
-        execute "au BufWinEnter " . a:filetypes . " call Preamble#Fold()"
+        execute 'au BufWinEnter' a:filetypes 'call Preamble#Fold()'
     augroup END
 endfunction
 
@@ -51,13 +51,13 @@ fun! Preamble#Fold()
 
     " if a fold aleady exists in line 1, just close it
     if foldlevel(1) && foldclosed(1) == -1
-        execute ":1,".pl."foldclose"
+        execute ':1,'.pl.'foldclose'
         return
     endif
 
-    if &foldmethod=="syntax" | return | endif
+    if &foldmethod=='syntax' | return | endif
 
-    execute "set foldmethod=manual | :1,".pl."fold | :1,".pl."foldclose"
+    execute 'set foldmethod=manual | :1,'.pl.'fold | :1,'.pl.'foldclose'
 endfunction
 
 
@@ -179,7 +179,7 @@ fun! s:Length()
         if !is_blankline
             let synId = synID(line_pos, 1, 1)
             let realSynId = synIDtrans(synId)
-            if (synIDattr( realSynId, 'name' ) != "Comment") | break | endif
+            if (synIDattr( realSynId, 'name' ) != 'Comment') | break | endif
         endif
 
         let line_pos = line_pos + 1
