@@ -27,7 +27,7 @@ fun! Preamble#Enable(filetypes)
     if a:filetypes == "" | return | endif
 
     augroup AugroupPreamble
-        exe "au BufWinEnter " . a:filetypes . " call Preamble#Fold()"
+        execute "au BufWinEnter " . a:filetypes . " call Preamble#Fold()"
     augroup END
 endfunction
 
@@ -51,13 +51,13 @@ fun! Preamble#Fold()
 
     " if a fold aleady exists in line 1, just close it
     if foldlevel(1) && foldclosed(1) == -1
-        exe ":1,".pl."foldclose"
+        execute ":1,".pl."foldclose"
         return
     endif
 
     if &foldmethod=="syntax" | return | endif
 
-    exe "set foldmethod=manual | :1,".pl."fold | :1,".pl."foldclose"
+    execute "set foldmethod=manual | :1,".pl."fold | :1,".pl."foldclose"
 endfunction
 
 
