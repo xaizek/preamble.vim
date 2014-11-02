@@ -1,5 +1,3 @@
-This is a mirror of http://www.vim.org/scripts/script.php?script_id=2919
-
 This plugin will automatically fold long preambles, such as GPL copyright
 notices, located at the head of source files.  You may find it helpful if,
 like me, you use syntax folding infrequently. 
