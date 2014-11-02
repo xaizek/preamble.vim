@@ -179,12 +179,33 @@ fun! s:Length()
         if !is_blankline
             let synId = synID(line_pos, 1, 1)
             let realSynId = synIDtrans(synId)
-            if (synIDattr( realSynId, 'name' ) != 'Comment') | break | endif
+            let attrName = synIDattr( realSynId, 'name' )
+            if attrName != 'Comment' && !s:IsInString(line_pos)
+                break
+            endif
         endif
 
         let line_pos = line_pos + 1
     endwhile
 
     return line_pos-1
- endfunction
+endfunction
 
+
+" ========================================================
+" IsInString: Checks whether line is part of a string
+"
+"   This is important for example for python, which
+"   doesn't have multiline comments and multiline string
+"   literals are used instead.
+" ========================================================
+
+fun! s:IsInString(line)
+    for id in synstack(a:line, 1)
+        let attrName = synIDattr(synIDtrans(id), 'name')
+        if attrName == 'String'
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
