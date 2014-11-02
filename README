@@ -1,3 +1,5 @@
+### Motivation
+
 This plugin will automatically fold long preambles, such as GPL copyright
 notices, located at the head of source files.  You may find it helpful if,
 like me, you use syntax folding infrequently.
@@ -8,7 +10,7 @@ functions and read the comments but not the 50 lines of licensing and
 copyright notices that head every file. Because these are third-party
 sources, I do not want to modify the files to include Vim fold markers.
 
-WHAT IT DOES:
+### What it does
 
 This plugin does not use fold markers and does not modify files.
 It adds the fold by changing the foldmethod to "manual" and inserting a
@@ -25,3 +27,17 @@ not having a comment in the first column.
 
 Note: If the preamble uses 'c' style comments without a border of characters
 in column 1 the preamble will not be recognized.
+
+### Usage
+
+For automatic folding, add a line to your .vimrc file, such as:
+
+```vim
+call Preamble#Enable('*.c,*.h,*.cpp,*.hpp,*.cs,*.py')
+```
+
+For more info on usage and options, use:
+
+```vim
+:help preamble
+```
