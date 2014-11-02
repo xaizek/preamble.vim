@@ -1,7 +1,7 @@
 *preamble.txt*	Folding preamble comments		         *preamble* *Preamble*
 
 Author:         Mel Davis <ZZmeldavisZZ@ZZsignals.selfip.orgZZ> (remove 'Z's)
-Last Change:    Jan 4, 2010
+Last Change:    Nov 2, 2014
 
 Plugin Version: 0.1
 
@@ -150,3 +150,4 @@ CHANGELOG~
 
 01/04/2010  Initial release
 
+vim:tw=78:sw=4:ft=help:norl:
