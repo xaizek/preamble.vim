@@ -33,7 +33,7 @@ in column 1 the preamble will not be recognized.
 For automatic folding, add a line to your .vimrc file, such as:
 
 ```vim
-call Preamble#Enable('*.c,*.h,*.cpp,*.hpp,*.cs,*.py')
+call Preamble#Enable('c,cpp,cs,py')
 ```
 
 For more info on usage and options, use:
