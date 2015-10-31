@@ -85,7 +85,7 @@ precedence over global.
 preamble_min_lines:  Sets the minimum size of a preamble.
 
     Type:       Integer
-    Default:    50
+    Default:    25
 
     If the preamble size is less, no fold will be created.
 

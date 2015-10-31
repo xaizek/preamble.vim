@@ -27,7 +27,7 @@ fun! Preamble#Enable(filetypes)
     if a:filetypes == "" | return | endif
 
     augroup AugroupPreamble
-        execute 'au BufWinEnter' a:filetypes 'call Preamble#Fold()'
+        execute 'au BufWinEnter,FileType' a:filetypes 'call Preamble#Fold()'
     augroup END
 endfunction
 
