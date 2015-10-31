@@ -49,9 +49,13 @@ fun! Preamble#Fold()
     if pl < s:preamble_min_lines | return | endif
     if pl > s:preamble_max_lines && !s:preamble_fold_partial | return | endif
 
-    " if a fold aleady exists in line 1, just close it
-    if foldlevel(1) && foldclosed(1) == -1
-        execute ':1,'.pl.'foldclose'
+    " if a fold aleady exists in line 1
+    if foldlevel(1)
+        " and it's open, close it
+        if foldclosed(1) == -1
+            execute ':1,'.pl.'foldclose'
+        endif
+        " or do nothing
         return
     endif
 
