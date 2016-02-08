@@ -170,26 +170,42 @@ endfunction
 fun! s:Length()
 
     let line_pos = 1
-    let is_blankline = 1
 
     while(line_pos <= s:preamble_max_lines)
+        let synId = synID(line_pos, 1, 1)
+        let realSynId = synIDtrans(synId)
+        let attrName = synIDattr( realSynId, 'name' )
+        " skip shebang in python
+        if attrName == 'PreProc'
+            let line_pos += 1
+            continue
+        endif
+
+        " skip <?php line in PHP sources
+        if attrName == 'Delimiter'
+            let line_pos += 1
+            break
+        endif
 
         " skip blank lines at top of file
-        if is_blankline && getline(line_pos) =~ '\S'
-            let is_blankline = 0
+        if getline(line_pos) =~ '\S'
+            break
         endif
 
+        let line_pos += 1
+    endwhile
+
+    while(line_pos <= s:preamble_max_lines)
         " assume each line of a preamble has a character in col one
-        if !is_blankline
-            let synId = synID(line_pos, 1, 1)
-            let realSynId = synIDtrans(synId)
-            let attrName = synIDattr( realSynId, 'name' )
-            if attrName != 'Comment' && !s:IsInString(line_pos)
-                break
-            endif
+        let synStack = synstack(line_pos, 1)
+        let synId = empty(synStack) ? 0 : synStack[-1]
+        let realSynId = synIDtrans(synId)
+        let attrName = synIDattr( realSynId, 'name' )
+        if attrName != 'Comment' && !s:IsInString(line_pos)
+            break
         endif
 
-        let line_pos = line_pos + 1
+        let line_pos += 1
     endwhile
 
     return line_pos-1
